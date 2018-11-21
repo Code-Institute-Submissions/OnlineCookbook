@@ -6,8 +6,41 @@
         <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
     </head>
     <body>
+        <header>
+            <ul id="dropdown1" class="dropdown-content">
+                <li><a href="{{url_for('get_recipes')}}">Home</a></li>
+                <li><a href="#">Add Recipe</a></li>
+                <li><a href="#">Add Author</a></li>
+                <li><a href="#">Add Cuisine</a></li>
+            </ul>
+            <ul class="sidenav" id="mobile-demo">
+                <li><a href="{{url_for('get_recipes')}}">Home</a></li>
+                <li><a href="#">Add Recipe</a></li>
+                <li><a href="#">Add Author</a></li>
+                <li><a href="#">Add Cuisine</a></li>
+            </ul>
+            <nav>
+                <div class="nav-wrapper custom_nav">
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <a href="{{url_for('get_recipes')}}" class="brand-logo my-logo">
+                        HomeCooked
+                        <i class="material-icons">local_dining</i>
+                    </a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Menu<i class="material-icons right">arrow_drop_down</i></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+   
+        {% block content %} {% endblock %}
         
-         {% block content %} {% endblock %}
+        <div>
+            <a href="{{url_for('get_recipes')}}" class="waves-effect waves-light btn btn_small button-center">Back to Recipes</a>
+            <a href="#}" class="waves-effect waves-light btn btn_small button-center">Add Recipe</a>
+            <a href="#" class="waves-effect waves-light btn btn_small button-center">Add Author</a>
+            <a href="#" class="waves-effect waves-light btn btn_small button-center">Add Cuisine</a>
+        </div>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
@@ -15,12 +48,12 @@
             $(document).ready(function(){
             $('.sidenav').sidenav();
             });
-        
+            
             $(".dropdown-trigger").dropdown();
             $(document).ready(function(){
             $('.collapsible').collapsible();
             });
-         
+             
             $(document).ready(function(){
             $('select').formSelect();
              });

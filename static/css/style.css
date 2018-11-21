@@ -1,0 +1,79 @@
+/* Layout */
+
+.menu_box {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.custom_nav {
+    background-color: #B098A4;
+}
+
+/* Buttons */
+
+.button-right {
+    float: right;
+    background-color: #B098A4;
+}
+
+.button-right:hover {
+    background-color: #726E75;
+}
+
+.button-center {
+    display: flex; 
+    justify-content: center;
+    background-color: #726E75;
+}
+
+.button-center:hover {
+    background-color: #B098A4;
+}
+
+/*  Text   */
+
+.v_friendly {
+    color: green;
+}
+
+
+.my-logo {
+    font-family: "Courier New", Courier, monospace;
+    }
+
+div, span {
+    font-family: Georgia, serif;
+}
+
+h3, h5, h6 {
+    text-align: center;
+}
+
+h4 {
+    text-decoration: underline;
+    text-align: center;
+}
+
+a {
+   color: #000000;
+}
+
+sup {
+    color: #B098A4;
+}
+
+.custom_link {
+    color: #B098A4;
+    text-decoration: underline;
+}
+
+/* Navigation */
+
+.my-nav {
+    background-color: #B098A4;
+}
+
+.my-nav:hover {
+    background-color: #726E75;
+}

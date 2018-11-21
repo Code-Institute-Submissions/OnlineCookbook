@@ -4,7 +4,8 @@
 3. Fixed Heroku loading bug.
 4. Addressed Heroku bug. Installed PyMongo. Created env.py for running the app locally, and added .gitignore so sensitive info. is not deployed.
 5. Added 'get_recipes' function and 'base.html', to ensure database connection was working.
-6. Added 'base.html', loaded Materialize, icons and custom.css.
+6. Added 'base.html' with layout, loaded Materialize, icons and custom.css.
+7. 
 
 
 
