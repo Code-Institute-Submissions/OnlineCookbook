@@ -63,6 +63,7 @@ def all_recipes():
     recipes = mongo.db.recipes.find()
     return render_template("all_recipes.html",
             recipes= recipes)
+        
     
 
 if __name__ == '__main__':

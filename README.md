@@ -6,6 +6,7 @@
 5. Added 'get_recipes' function and 'base.html', to ensure database connection was working.
 6. Added 'base.html' with layout, loaded Materialize, icons and custom.css.
 7. Added working home page with get_counts and extended get_recipes functions. 
+8. Started automated testing. 
 
 
 
@@ -45,6 +46,10 @@ I then manually checked whether the database was correctly linked to the app, by
 >    return render_template("recipes.html", recipes=mongo.db.recipes.find())
 
 Then I added a loop on 'recipes.html' to print the recipes names. When I ran my app, all of the recipes names were listed on the page, so I knew my dabase was correctly loaded.
+
+I created my first unit tests after implementing the home page. I started by testing that the tests themselves were working, by asserting that 1 and 1 were equal. I followed this by testing the status codes of the app, to ensure the response status code did return with 200, and did not return with a 404.
+
+I manually tested my get_counts function by comparing the count on my home page with the number of recipes in my database.
 
 
 
