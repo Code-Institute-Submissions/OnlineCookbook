@@ -2,7 +2,7 @@
 1. Initial commit. Updated MongoDB, connected to database. Installed Flask. Started app.py. Deployed to Heroku.
 2. Added requirements.txt and Procfile.
 3. Fixed Heroku loading bug.
-4. 
+4. Addressed Heroku bug. Installed PyMongo. Created env.py for running the app locally, and added .gitignore so sensitive info. is not deployed.
 
 
 
@@ -32,3 +32,5 @@ I encountered a bug when trying to deploy to Heroku - the app wouldn't load. I r
 > pip3 freeze -- local >> requirements.txt
 
 I realised that I had originally missed a space between '--' and 'local', which left requirements.txt empty. This taught me to always check my files before pushing to Heroku and Git Hub, because I would have realised that the file was empty and therefore the app would not load.
+
+I then had an issue with Flask ...
