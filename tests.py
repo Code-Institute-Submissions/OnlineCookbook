@@ -35,7 +35,11 @@ class TestStringMethods(unittest.TestCase):
             response = client.get('/add_author')
             self.assertEqual(response.status_code, 200)
             self.assertNotEqual(response.status_code, 404)
-        
+
+            response = client.get('/add_cuisine')
+            self.assertEqual(response.status_code, 200)
+            self.assertNotEqual(response.status_code, 404)
+            
             
             # The following tests include working id numbers from my database, as required by the url
             response = client.get('/search_veg/5b66ce3ffb6fc06798a136c4')

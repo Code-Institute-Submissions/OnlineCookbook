@@ -11,13 +11,13 @@
                 <li><a href="{{url_for('get_recipes')}}">Home</a></li>
                 <li><a href="{{url_for('add_recipe')}}">Add Recipe</a></li>
                 <li><a href="{{url_for('add_author')}}">Add Author</a></li>
-                <li><a href="#">Add Cuisine</a></li>
+                <li><a href="{{url_for('add_cuisine')}}">Add Cuisine</a></li>
             </ul>
             <ul class="sidenav" id="mobile-demo">
                 <li><a href="{{url_for('get_recipes')}}">Home</a></li>
                 <li><a href="{{url_for('add_recipe')}}">Add Recipe</a></li>
                 <li><a href="{{url_for('add_author')}}">Add Author</a></li>
-                <li><a href="#">Add Cuisine</a></li>
+                <li><a href="{{url_for('add_cuisine')}}">Add Cuisine</a></li>
             </ul>
             <nav>
                 <div class="nav-wrapper custom_nav">
@@ -39,7 +39,7 @@
             <a href="{{url_for('get_recipes')}}" class="waves-effect waves-light btn btn_small button-center">Back to Recipes</a>
             <a href="{{url_for('add_recipe')}}" class="waves-effect waves-light btn btn_small button-center">Add Recipe</a>
             <a href="{{url_for('add_author')}}" class="waves-effect waves-light btn btn_small button-center">Add Author</a>
-            <a href="#" class="waves-effect waves-light btn btn_small button-center">Add Cuisine</a>
+            <a href="{{url_for('add_cuisine')}}" class="waves-effect waves-light btn btn_small button-center">Add Cuisine</a>
         </div>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

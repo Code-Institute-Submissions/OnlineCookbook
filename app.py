@@ -170,6 +170,19 @@ def insert_author():
     authors_list.insert_one(request.form.to_dict())
     return redirect(url_for('get_recipes'))
     
+    
+# Renders a page where users can add a type of cuisine to the database
+@app.route('/add_cuisine')
+def add_cuisine():
+    return render_template('add_cuisine.html')
+    
+# Adds user's input into the database
+@app.route('/insert_cuisine', methods=['POST'])
+def insert_cuisine():
+    cuisine_list =  mongo.db.cuisine_list
+    cuisine_list.insert_one(request.form.to_dict())
+    return redirect(url_for('get_recipes'))
+
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

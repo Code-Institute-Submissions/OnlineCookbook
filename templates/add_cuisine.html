@@ -2,12 +2,12 @@
 
 <div class="menu_box">
     <ul class="collapsible">
-        <h3> Add Author </h3><br>
-        <form action="{{ url_for('insert_author') }}" method="POST" class="col s12">
+        <h3> Add Cuisine </h3><br>
+        <form action="{{ url_for('insert_cuisine') }}" method="POST" class="col s12">
             <div class="input-field col s6">
-                <i class="material-icons prefix">face</i>
-                <input id="author" name="author" type="text" required>
-                <label for="author">Author's Name</label>
+                <i class="material-icons prefix">location_city</i>
+                <input id="cuisine_name" name="cuisine_name" type="text" required>
+                <label for="cuisine_name">Cuisine Name</label>
             </div>
             <div class="input-field  col s6">
                 <button class="btn waves-effect waves-light button-right" type="submit" name="action">Submit
@@ -16,6 +16,7 @@
             </div>
         </form>
         <br><br><br>
-    </ul>
+    <ul>
 </div>
+        
 {% endblock %}

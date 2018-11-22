@@ -10,6 +10,7 @@
 9. Added search_veg and search_cuisine functions, and relevant templates. Wrote automated tests for functions so far.
 10. Users can now submit recipes to the database, with the 'insert_recipe' function.
 11. Users can now submit recipes to the database, with the 'insert_author' function.
+12. Users can now submit recipes to the database, with the 'insert_cuisine' function.
 
 
 
@@ -58,6 +59,7 @@ I manually tested my get_counts function by comparing the count on my home page 
 
 I manually tested the 'insert_recipe' function, by adding a recipe to the database via. the app. I could tell that it worked by searching for the recipe under the relevant categories - my name and the cuisine.
 
+I manually tested my links, by running through every link on my page.
 
 
 ### Bugs
