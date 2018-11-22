@@ -59,11 +59,35 @@ def get_recipes():
     
 
 # Function that returns all recipes from the recipes collction in the database
-@app.route('/all_recipes')
+# @app.route('/all_recipes')
+# def all_recipes():
+#     recipes = mongo.db.recipes.find()
+#     return render_template("all_recipes.html",
+#             recipes=recipes)
+
+@app.route('/all_recipes/')
 def all_recipes():
     recipes = mongo.db.recipes.find()
-    return render_template("all_recipes.html",
-            recipes= recipes)
+    all_recipes_list = []
+    for recipe in recipes:
+            recipe_obj = {
+                'recipe_obj': recipe,
+                'recipe_loves': recipe['recipe_loves'],
+                'author_name': recipe['author_name'],
+                'recipe_id': recipe['_id'],
+                'recipe_name': recipe['recipe_name'],
+                'cuisine_name': recipe['cuisine_name'],
+                'recipe_description': recipe['recipe_description'],
+                'recipe_ingredients': recipe['recipe_ingredients'],
+                'recipe_method': recipe['recipe_method'],
+                'recipe_is_vegetarian': recipe['recipe_is_vegetarian']
+            }
+            all_recipes_list.append(recipe_obj)
+    all_recipes_list = sorted(all_recipes_list, key=itemgetter("recipe_loves"), reverse=True)
+    return render_template('all_recipes.html', recipes=recipes, all_recipes_list=all_recipes_list)
+
+
+
             
             
 # Function that returns all of the vegetarian recipes and renders them to 'search_veg.html'
@@ -75,7 +99,7 @@ def search_veg(veg_id):
     for recipe in recipes:
         if recipe['recipe_is_vegetarian'] == expand_veg['vegetarian']:
             recipe_obj = {
-              'recipe_obj': recipe,
+                'recipe_obj': recipe,
                 'recipe_loves': recipe['recipe_loves'],
                 'author_name': recipe['author_name'],
                 'recipe_id': recipe['_id'],
@@ -125,7 +149,7 @@ def search_author(author_id):
     for recipe in recipes:
         if recipe['author_name'] == expand_author['author']:
             recipe_obj = {
-               'recipe_obj': recipe,
+                'recipe_obj': recipe,
                 'recipe_loves': recipe['recipe_loves'],
                 'author_name': recipe['author_name'],
                 'recipe_id': recipe['_id'],
@@ -182,6 +206,40 @@ def insert_cuisine():
     cuisine_list =  mongo.db.cuisine_list
     cuisine_list.insert_one(request.form.to_dict())
     return redirect(url_for('get_recipes'))
+    
+    
+# Renders a page where users can edit recipes already in the database
+@app.route('/edit_recipe/<recipe_id>')
+def edit_recipe(recipe_id):
+    the_recipe =  mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    all_cuisines =  mongo.db.cuisine_list.find()
+    all_authors = mongo.db.authors_list.find()
+    return render_template('edit_recipe.html', recipe=the_recipe, cuisine_list=all_cuisines, authors_list=all_authors)
+  
+  
+# Updates the existing recipe in the database with the user's input
+@app.route('/update_recipe/<recipe_id>', methods=["POST"])
+def update_recipe(recipe_id):
+    recipes = mongo.db.recipes
+    recipes.update( {'_id': ObjectId(recipe_id)},
+    {
+        'recipe_name':request.form.get['recipe_name'],
+        'cuisine_name':request.form.get['cuisine_name'],
+        'author_name': request.form.get['author_name'],
+        'description': request.form.get['recipe_description'],
+        'ingredients':request.form.get['recipe_ingredients'],
+        'method':request.form.get['recipe_method'],
+        'recipe_is_vegetarian':request.form.get['recipe_is_vegetarian'],
+        'recipe_loves':request.form.get['recipe_loves']
+    })
+    return redirect(url_for('get_recipes'))
+ 
+ 
+# Allows a user to delete a recipe from the database
+@app.route('/delete_recipe/<recipe_id>')
+def delete_recipe(recipe_id):
+    mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
+    return redirect(url_for('get_recipes')) 
 
 
 if __name__ == '__main__':

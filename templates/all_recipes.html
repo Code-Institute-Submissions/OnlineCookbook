@@ -4,7 +4,7 @@
     <ul class="collapsible">
         <h3>All Recipes in the Database</h3>
         
-        {% for rec in recipes %}
+        {% for rec in all_recipes_list %}
             <li class="divider"></li>
             <li>
                 <div class="collapsible-header">
@@ -23,8 +23,8 @@
                         {% else %} No 
                         {% endif %} <br><br>
                     <b>How many loves for this recipe? </b>{{ rec.recipe_loves }} <sub><i class="material-icons tiny">favorite</i></sub><br><br>
-                <a href="#" class="waves-effect waves-light btn btn_small button-right">Edit</a>
-                <a href="#" class="waves-effect waves-light btn btn_small button-right">Delete</a><br>
+                <a href="{{url_for('edit_recipe', recipe_id=rec.recipe_id)}}" class="waves-effect waves-light btn btn_small button-right">Edit</a>
+                <a href="{{url_for('delete_recipe', recipe_id=rec.recipe_id)}}" class="waves-effect waves-light btn btn_small button-right">Delete</a><br>
                 </div>
             </li>
         {% endfor %}

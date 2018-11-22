@@ -1,3 +1,10 @@
+Project Four: 
+
+name
+
+CRUD operators
+
+
 ### Version Control
 1. Initial commit. Updated MongoDB, connected to database. Installed Flask. Started app.py. Deployed to Heroku.
 2. Added requirements.txt and Procfile.
@@ -11,6 +18,8 @@
 10. Users can now submit recipes to the database, with the 'insert_recipe' function.
 11. Users can now submit recipes to the database, with the 'insert_author' function.
 12. Users can now submit recipes to the database, with the 'insert_cuisine' function.
+13. Added functions to allow users to edit and delete recipes that already exist in the database.
+14. Fixed 'all_recipes' bug. Added a title to the home page. Added Materialize library code, to differentiate from my code.
 
 
 
@@ -59,7 +68,9 @@ I manually tested my get_counts function by comparing the count on my home page 
 
 I manually tested the 'insert_recipe' function, by adding a recipe to the database via. the app. I could tell that it worked by searching for the recipe under the relevant categories - my name and the cuisine.
 
-I manually tested my links, by running through every link on my page.
+I manually tested my links, by running through every link on my page. This was successful, as I realised that I had called one of my templates *'edit_recipe.html'* in the */edit_recipe/* function, but named the template iteself *'edit_recipes.html'*, so the page would not load. I was able to fix this due to my manual testing of the app.
+
+I also found a bug when attempting to edit a recipe under the *'all_recipes'* page. This was because the <id> of the recipe was not included in the function, so the specific recipe the user wanted to edit could not be located in the database by the unique id. I resolved this by refactoring the 'all_recipes' function, to include the unique id of each recipe.
 
 
 ### Bugs
@@ -71,3 +82,9 @@ I encountered a bug when trying to deploy to Heroku - the app wouldn't load. I r
 I realised that I had originally missed a space between '--' and 'local', which left requirements.txt empty. This taught me to always check my files before pushing to Heroku and Git Hub, because I would have realised that the file was empty and therefore the app would not load.
 
 The push of the updated requirements.txt then caused a second error with Heroku, as I had pushed requirements that were default to the workspace, which Heroku could not load. I cleared the requirements.txt and will be manually adding to the file, so this issue does not happen in the future. 
+
+
+
+Languages and Technologies
+
+Materialize

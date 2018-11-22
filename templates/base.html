@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
+        <!--Loads Materialize CSS, icons and custom CSS-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
+        
+        <!--Title of app-->
+        <title>HomeCooked Online Cook Book</title>
     </head>
     <body>
         <header>
+            
+            <!--Content for dropdown menu on devices larger than mobiles-->
             <ul id="dropdown1" class="dropdown-content">
                 <li><a href="{{url_for('get_recipes')}}">Home</a></li>
                 <li><a href="{{url_for('add_recipe')}}">Add Recipe</a></li>
                 <li><a href="{{url_for('add_author')}}">Add Author</a></li>
                 <li><a href="{{url_for('add_cuisine')}}">Add Cuisine</a></li>
             </ul>
+            
+            <!--Content for dropdown menu on mobile devices-->
             <ul class="sidenav" id="mobile-demo">
                 <li><a href="{{url_for('get_recipes')}}">Home</a></li>
                 <li><a href="{{url_for('add_recipe')}}">Add Recipe</a></li>

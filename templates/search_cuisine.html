@@ -1,37 +1,39 @@
 {% extends 'base.html'%} {% block content %}
 
 <div class="menu_box">
- <ul class="collapsible">
-    <h3>{{ cuisine.cuisine_name.capitalize() }} Recipes</h3><br>
-    <li class="divider"></li>
-    {% if not cuisine_recipes %}
-        <div class="center"><br>
-            It doesn't look like there are any {{ cuisine.cuisine_name.capitalize() }} recipes just yet. <br><br>
-            <a href="{{url_for('get_recipes')}}" class="waves-effect waves-light btn btn_small button-center">Back</a>
-        </div>
-    {% endif %}
-    {% for rec in cuisine_recipes %}
-    <li>
-        <div class="collapsible-header">
-            {{ rec.recipe_name }} <i class="material-icons small">add</i>
-        </div>
-        <div class="collapsible-body">
-            <h4> {{ rec.recipe_name }}</h4>
-            <h6>{{ rec.recipe_description }} </h6>
-            <h6>Submitted by aspiring chef <b>{{ rec.author_name }}! </b></h6> <br>
-            <b>Cuisine: </b>{{ rec.cuisine_name }} <br><br>
-            <b>Ingredients: </b>{{ rec.recipe_ingredients }} <br><br>
-            <b>Method: </b>{{ rec.recipe_method }} <br><br>
-            <b>Is the recipe vegetarian? </b>
-                {% if rec.recipe_is_vegetarian == "true" %}
-                    <span class="v_friendly">Yes!</span>
-                {% else %} No 
-                {% endif %} <br><br>
-            <b>How many loves for this recipe? </b>{{ rec.recipe_loves }} <sub><i class="material-icons tiny">favorite</i></sub><br><br>
-            <a href="#" class="waves-effect waves-light btn btn_small button-right">Edit</a>
-            <a href="#" class="waves-effect waves-light btn btn_small button-right">Delete</a><br>
-        </div>
-    </li>
-    {% endfor %}
+    <ul class="collapsible">
+        <h3>{{ cuisine.cuisine_name.capitalize() }} Recipes</h3><br>
+        <li class="divider"></li>
+        {% if not cuisine_recipes %}
+            <div class="center"><br>
+                It doesn't look like there are any {{ cuisine.cuisine_name.capitalize() }} recipes just yet. <br><br>
+                <a href="{{url_for('get_recipes')}}" class="waves-effect waves-light btn btn_small button-center">Back</a>
+            </div>
+        {% endif %}
+        {% for rec in cuisine_recipes %}
+        <li>
+            <div class="collapsible-header">
+                {{ rec.recipe_name }} <i class="material-icons small">add</i>
+            </div>
+            <div class="collapsible-body">
+                <h4> {{ rec.recipe_name }}</h4>
+                <h6>{{ rec.recipe_description }} </h6>
+                <h6>Submitted by aspiring chef <b>{{ rec.author_name }}! </b></h6> <br>
+                <b>Cuisine: </b>{{ rec.cuisine_name }} <br><br>
+                <b>Ingredients: </b>{{ rec.recipe_ingredients }} <br><br>
+                <b>Method: </b>{{ rec.recipe_method }} <br><br>
+                <b>Is the recipe vegetarian? </b>
+                    {% if rec.recipe_is_vegetarian == "true" %}
+                        <span class="v_friendly">Yes!</span>
+                    {% else %} No 
+                    {% endif %} <br><br>
+                <b>How many loves for this recipe? </b>{{ rec.recipe_loves }} <sub><i class="material-icons tiny">favorite</i></sub><br><br>
+                <a href="{{url_for('edit_recipe', recipe_id=rec.recipe_id)}}" class="waves-effect waves-light btn btn_small button-right">Edit</a>
+                <a href="{{url_for('delete_recipe', recipe_id=rec.recipe_id)}}" class="waves-effect waves-light btn btn_small button-right">Delete</a><br>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 
 {% endblock %}  
