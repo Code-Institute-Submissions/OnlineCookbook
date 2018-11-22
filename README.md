@@ -7,6 +7,7 @@
 6. Added 'base.html' with layout, loaded Materialize, icons and custom.css.
 7. Added working home page with get_counts and extended get_recipes functions. 
 8. Started automated testing. 
+9. Added search_veg and search_cuisine functions, and relevant templates.
 
 
 
@@ -49,7 +50,10 @@ Then I added a loop on 'recipes.html' to print the recipes names. When I ran my 
 
 I created my first unit tests after implementing the home page. I started by testing that the tests themselves were working, by asserting that 1 and 1 were equal. I followed this by testing the status codes of the app, to ensure the response status code did return with 200, and did not return with a 404.
 
-I manually tested my get_counts function by comparing the count on my home page with the number of recipes in my database.
+I wrote automated tests for all of the search functions, which I used with working id numbers pulled from my database. Again, I ensured the status code response was 200 and not 404.
+
+I manually tested my get_counts function by comparing the count on my home page with the number of recipes in my database. I also wrote an automated test for this, to ensure the function worked correctly. The automated test was split into two parts, with two separate test recipe objects, with different names and counts. I used a variety of differences to ensure the function was working correctly, and used the *assertEqual* method for the correct response, and also included an incorrect response with the *assertNotEqual*. 
+
 
 
 

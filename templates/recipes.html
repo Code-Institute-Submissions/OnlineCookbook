@@ -27,7 +27,7 @@
         </div>
         <div class="collapsible-body">
             {% for veg in vegetarian_list %}
-                <a href='#'> Vegetarian Recipes
+                <a href='{{url_for('search_veg', veg_id=veg._id)}}'> Vegetarian Recipes
                 <i class="material-icons tiny">add</i></a>
             {% endfor %}
             {% for veggie in veg_counts %}
@@ -43,7 +43,7 @@
         {% for cuiz in cuisine_list %}
             {% for cuis in cuisine_counts %}
                 {% if cuis.capitalize() == cuiz.cuisine_name %}
-                    <a href='#'>
+                    <a href={{url_for('search_cuisine', cuisine_id=cuiz._id)}}>
                         {{ cuiz.cuisine_name }}
                         <i class="material-icons tiny">add</i></a>
                         <sup> 
@@ -61,7 +61,7 @@
         {% for auth in authors_list %}
             {% for author in author_counts %}
                 {% if author.capitalize() == auth.author.capitalize() %}
-                    <a href='#'>
+                    <a href={{url_for('search_author', author_id=auth._id)}}>
                         {{ auth.author }}
                         <i class="material-icons tiny">add</i></a>
                         <sup> 

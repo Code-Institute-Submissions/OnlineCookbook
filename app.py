@@ -3,6 +3,7 @@ import env
 from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from operator import itemgetter
 
 # Loads Flask and PyMongo, and loads database
 app = Flask(__name__)
@@ -53,7 +54,7 @@ def get_recipes():
     vegetarian_list=mongo.db.vegetarian_list.find(),
     veg_counts=veg_counts,
     cuisine_counts=cuisine_counts, 
-    author_counts = author_counts, 
+    author_counts = author_counts,
     all_recipe_count = mongo.db.recipes.count())
     
 
@@ -63,7 +64,82 @@ def all_recipes():
     recipes = mongo.db.recipes.find()
     return render_template("all_recipes.html",
             recipes= recipes)
-        
+            
+            
+# Function that returns all of the vegetarian recipes and renders them to 'search_veg.html'
+@app.route('/search_veg/<veg_id>')
+def search_veg(veg_id):
+    expand_veg = mongo.db.vegetarian_list.find_one({"_id": ObjectId(veg_id)})
+    recipes = mongo.db.recipes.find()
+    veg_recipes = []
+    for recipe in recipes:
+        if recipe['recipe_is_vegetarian'] == expand_veg['vegetarian']:
+            recipe_obj = {
+              'recipe_obj': recipe,
+                'recipe_loves': recipe['recipe_loves'],
+                'author_name': recipe['author_name'],
+                'recipe_id': recipe['_id'],
+                'recipe_name': recipe['recipe_name'],
+                'cuisine_name': recipe['cuisine_name'],
+                'recipe_description': recipe['recipe_description'],
+                'recipe_ingredients': recipe['recipe_ingredients'],
+                'recipe_method': recipe['recipe_method'],
+                'recipe_is_vegetarian': recipe['recipe_is_vegetarian']
+            }
+            veg_recipes.append(recipe_obj)
+    veg_recipes = sorted(veg_recipes, key=itemgetter("recipe_loves"), reverse=True)
+    return render_template('search_veg.html', veg_recipes=veg_recipes, veg=expand_veg, recipes=mongo.db.recipes.find())
+    
+
+# Function that returns all of the recipes by cuisine and renders them to 'search_cuisine.html' 
+@app.route('/search_cuisine/<cuisine_id>')
+def search_cuisine(cuisine_id):
+    expand_cuisine = mongo.db.cuisine_list.find_one({"_id": ObjectId(cuisine_id)})
+    recipes = mongo.db.recipes.find()
+    cuisine_recipes = []
+    for recipe in recipes:
+        if recipe['cuisine_name'] == expand_cuisine['cuisine_name']:
+            recipe_obj = {
+                'recipe_obj': recipe,
+                'recipe_loves': recipe['recipe_loves'],
+                'author_name': recipe['author_name'],
+                'recipe_id': recipe['_id'],
+                'recipe_name': recipe['recipe_name'],
+                'cuisine_name': recipe['cuisine_name'],
+                'recipe_description': recipe['recipe_description'],
+                'recipe_ingredients': recipe['recipe_ingredients'],
+                'recipe_method': recipe['recipe_method'],
+                'recipe_is_vegetarian': recipe['recipe_is_vegetarian']
+            }
+            cuisine_recipes.append(recipe_obj)
+    cuisine_recipes = sorted(cuisine_recipes, key=itemgetter("recipe_loves"), reverse=True)
+    return render_template('search_cuisine.html', cuisine_recipes=cuisine_recipes, cuisine=expand_cuisine, recipes=mongo.db.recipes.find())
+
+
+# Function that returns all of the recipes by a particular author and renders them to 'search_author.html' 
+@app.route('/search_author/<author_id>')
+def search_author(author_id):
+    expand_author = mongo.db.authors_list.find_one({"_id": ObjectId(author_id)})
+    recipes = mongo.db.recipes.find()
+    author_recipes = []
+    for recipe in recipes:
+        if recipe['author_name'] == expand_author['author']:
+            recipe_obj = {
+               'recipe_obj': recipe,
+                'recipe_loves': recipe['recipe_loves'],
+                'author_name': recipe['author_name'],
+                'recipe_id': recipe['_id'],
+                'recipe_name': recipe['recipe_name'],
+                'cuisine_name': recipe['cuisine_name'],
+                'recipe_description': recipe['recipe_description'],
+                'recipe_ingredients': recipe['recipe_ingredients'],
+                'recipe_method': recipe['recipe_method'],
+                'recipe_is_vegetarian': recipe['recipe_is_vegetarian']
+            }
+            author_recipes.append(recipe_obj)
+    author_recipes = sorted(author_recipes, key=itemgetter("recipe_loves"), reverse=True)
+    return render_template('search_author.html', author_recipes=author_recipes, author=expand_author, recipes=mongo.db.recipes.find())
+
     
 
 if __name__ == '__main__':
