@@ -13,6 +13,7 @@ class TestStringMethods(unittest.TestCase):
     def test_is_this_thing_on(self):
         """ Test that testing is working properly """
         self.assertEqual(1, 1)
+        print("Test 'test_is_this_thing_on' has passed")
         
     
     """ Tests the status of the home page and subsequent pages return a code 200, which implies they are working correctly, and not a 404 code """
@@ -26,6 +27,12 @@ class TestStringMethods(unittest.TestCase):
             response = client.get('/all_recipes')
             self.assertEqual(response.status_code, 200)
             self.assertNotEqual(response.status_code, 404)
+            
+            response = client.get('/add_recipe')
+            self.assertEqual(response.status_code, 200)
+            self.assertNotEqual(response.status_code, 404)
+            
+        
             
             # The following tests include working id numbers from my database, as required by the url
             response = client.get('/search_veg/5b66ce3ffb6fc06798a136c4')

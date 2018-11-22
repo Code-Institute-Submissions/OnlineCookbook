@@ -139,6 +139,20 @@ def search_author(author_id):
             author_recipes.append(recipe_obj)
     author_recipes = sorted(author_recipes, key=itemgetter("recipe_loves"), reverse=True)
     return render_template('search_author.html', author_recipes=author_recipes, author=expand_author, recipes=mongo.db.recipes.find())
+    
+# Renders a page where users can add recipes to the database
+@app.route('/add_recipe')
+def add_recipe():
+    return render_template('add_recipe.html',
+     cuisine_list=mongo.db.cuisine_list.find(),
+     authors_list=mongo.db.authors_list.find())
+
+# Adds user's input into the database
+@app.route('/insert_recipe', methods=['POST'])
+def insert_recipe():
+    recipes =  mongo.db.recipes
+    recipes.insert_one(request.form.to_dict())
+    return redirect(url_for('get_recipes'))
 
     
 

@@ -7,7 +7,8 @@
 6. Added 'base.html' with layout, loaded Materialize, icons and custom.css.
 7. Added working home page with get_counts and extended get_recipes functions. 
 8. Started automated testing. 
-9. Added search_veg and search_cuisine functions, and relevant templates.
+9. Added search_veg and search_cuisine functions, and relevant templates. Wrote automated tests for functions so far.
+10. Users can now submit recipes to the database, with the 'insert_recipe' function.
 
 
 
@@ -54,6 +55,7 @@ I wrote automated tests for all of the search functions, which I used with worki
 
 I manually tested my get_counts function by comparing the count on my home page with the number of recipes in my database. I also wrote an automated test for this, to ensure the function worked correctly. The automated test was split into two parts, with two separate test recipe objects, with different names and counts. I used a variety of differences to ensure the function was working correctly, and used the *assertEqual* method for the correct response, and also included an incorrect response with the *assertNotEqual*. 
 
+I manually tested the 'insert_recipe' function, by adding a recipe to the database via. the app. I could tell that it worked by searching for the recipe under the relevant categories - my name and the cuisine.
 
 
 
