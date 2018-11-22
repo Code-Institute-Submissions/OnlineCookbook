@@ -18,8 +18,8 @@ CRUD operators
 10. Users can now submit recipes to the database, with the 'insert_recipe' function.
 11. Users can now submit recipes to the database, with the 'insert_author' function.
 12. Users can now submit recipes to the database, with the 'insert_cuisine' function.
-13. Added functions to allow users to edit and delete recipes that already exist in the database.
-14. Fixed 'all_recipes' bug. Added a title to the home page. Added Materialize library code, to differentiate from my code.
+13. Added functions to allow users to edit and delete recipes that already exist in the database. Fixed 'all_recipes' bug. Added a title to the home page. Added Materialize library code, to differentiate from my code.
+14. Completed library of code. Added media queries.
 
 
 
@@ -72,6 +72,10 @@ I manually tested my links, by running through every link on my page. This was s
 
 I also found a bug when attempting to edit a recipe under the *'all_recipes'* page. This was because the <id> of the recipe was not included in the function, so the specific recipe the user wanted to edit could not be located in the database by the unique id. I resolved this by refactoring the 'all_recipes' function, to include the unique id of each recipe.
 
+I tested how the code worked on different screen sizes, by using the emulator 
+function in the developer tools, and also on my mobile device, laptop and 
+tablet. During this manual test, I realised that I had added custom CSS that made the menu box on every page look very small on mobile devices, because it was set to 50% across every screen size. To fix this, I added CSS3 media queries, so that the custom CSS for *'.menu-box'* was different across the different screen sizes.
+
 
 ### Bugs
 
@@ -88,3 +92,7 @@ The push of the updated requirements.txt then caused a second error with Heroku,
 Languages and Technologies
 
 Materialize
+jQuery
+CSS3 including media queries
+HTML
+Python
