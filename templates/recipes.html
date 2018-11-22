@@ -1,77 +1,82 @@
 {% extends 'base.html'%} {% block content %}
 
 <div class="menu_box">
- <ul class="collapsible">
-    <h4 class="center">Welcome!</h4>
-    <div class="center">
-        We are a collaborative recipe website. <br>
-        Please feel free to use our recipes, and add to our collection.<br><br>
-    </div>
-    <li class="divider"></li>
-    <li>
-    <div class="collapsible-header"><i class="material-icons">public</i>View all Recipes</div>
-        <div class="collapsible-body">
-            <a href={{url_for('all_recipes')}}>
-                All Recipes
-                <i class="material-icons tiny">add</i>
-            </a>
-            <sup>
-                {{ all_recipe_count }} recipes
-            </sup>
-       </div>
-    </li>
+    <ul class="collapsible">
+        <h4 class="center">Welcome!</h4>
+        <div class="center">
+            We are a collaborative recipe website. <br>
+            Please feel free to use our recipes, and add to our collection.<br><br>
+        </div>
+        <li class="divider"></li>
         <li>
-        <div class="collapsible-header">
-            <i class="material-icons">pets</i>
-            View Vegetarian Recipes
-        </div>
-        <div class="collapsible-body">
-            {% for veg in vegetarian_list %}
-                <a href='{{url_for('search_veg', veg_id=veg._id)}}'> Vegetarian Recipes
-                <i class="material-icons tiny">add</i></a>
-            {% endfor %}
-            {% for veggie in veg_counts %}
+        <div class="collapsible-header"><i class="material-icons">public</i>View all Recipes</div>
+            <div class="collapsible-body">
+                <a href={{url_for('all_recipes')}}>
+                    All Recipes
+                    <i class="material-icons tiny">add</i>
+                </a>
                 <sup>
-                    {{ veg_counts[veggie] }} recipes
+                    {{ all_recipe_count }} recipes
                 </sup>
+           </div>
+        </li>
+            <li>
+            <div class="collapsible-header">
+                <i class="material-icons">pets</i>
+                View Vegetarian Recipes
+            </div>
+            <div class="collapsible-body">
+                <!--Loops through all vegetarian recipes-->
+                {% for veg in vegetarian_list %}
+                    <a href='{{url_for('search_veg', veg_id=veg._id)}}'> Vegetarian Recipes
+                    <i class="material-icons tiny">add</i></a>
+                {% endfor %}
+                {% for veggie in veg_counts %}
+                    <sup>
+                        {{ veg_counts[veggie] }} recipes
+                    </sup>
+                {% endfor %}
+            </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">location_city</i>Search by Cuisine</div>
+          <div class="collapsible-body">
+            <!--Loops through all of the different cuisines, and prints the total number of that type of cuisine next to the cuisine name-->
+            {% for cuiz in cuisine_list %}
+                {% for cuis in cuisine_counts %}
+                    {% if cuis.capitalize() == cuiz.cuisine_name %}
+                        <a href={{url_for('search_cuisine', cuisine_id=cuiz._id)}}>
+                            {{ cuiz.cuisine_name }}
+                            <i class="material-icons tiny">add</i></a>
+                            <sup> 
+                                {{ cuisine_counts[cuis] }} recipes
+                            </sup><br>
+                        </a>
+                    {% endif %}
+                {% endfor %}            
             {% endfor %}
-        </div>
-    </li>
-    <li>
-      <div class="collapsible-header"><i class="material-icons">location_city</i>Search by Cuisine</div>
-      <div class="collapsible-body">
-        {% for cuiz in cuisine_list %}
-            {% for cuis in cuisine_counts %}
-                {% if cuis.capitalize() == cuiz.cuisine_name %}
-                    <a href={{url_for('search_cuisine', cuisine_id=cuiz._id)}}>
-                        {{ cuiz.cuisine_name }}
-                        <i class="material-icons tiny">add</i></a>
-                        <sup> 
-                            {{ cuisine_counts[cuis] }} recipes
-                        </sup><br>
-                    </a>
-                {% endif %}
-            {% endfor %}            
-        {% endfor %}
-       </div>
-    </li>
-    <li>
-      <div class="collapsible-header"><i class="material-icons">face</i>Search by Author</div>
-      <div class="collapsible-body"><span>
-        {% for auth in authors_list %}
-            {% for author in author_counts %}
-                {% if author.capitalize() == auth.author.capitalize() %}
-                    <a href={{url_for('search_author', author_id=auth._id)}}>
-                        {{ auth.author }}
-                        <i class="material-icons tiny">add</i></a>
-                        <sup> 
-                            {{ author_counts[author] }} recipes
-                        </sup><br>
-                    </a>
-                {% endif %}
-            {% endfor %}            
-        {% endfor %}
-        </span></div>
-    </li>
+           </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">face</i>Search by Author</div>
+          <div class="collapsible-body"><span>
+            <!--Loops through all of the different authors, and prints the total number of that type of cuisine next to the author's name, including a capital letter at the start-->
+            {% for auth in authors_list %}
+                {% for author in author_counts %}
+                    {% if author.capitalize() == auth.author.capitalize() %}
+                        <a href={{url_for('search_author', author_id=auth._id)}}>
+                            {{ auth.author }}
+                            <i class="material-icons tiny">add</i></a>
+                            <sup> 
+                                {{ author_counts[author] }} recipes
+                            </sup><br>
+                        </a>
+                    {% endif %}
+                {% endfor %}            
+            {% endfor %}
+            </span></div>
+        </li>
+    </ul>
+</div
 
 {% endblock %}  

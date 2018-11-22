@@ -1,5 +1,6 @@
 {% extends 'base.html'%} {% block content %}
 
+<!--If the specified author has submitted any recipes to the database, they will be printed to this page, with a collapsible option to show more information. If they haven't a message will displayed informing the user of this-->
 <div class="menu_box">
     <ul class="collapsible">
         <h3>All recipes from {{ author.author }} </h3><br>

@@ -112,7 +112,7 @@ def search_veg(veg_id):
                 'recipe_method': recipe['recipe_method'],
                 'recipe_is_vegetarian': recipe['recipe_is_vegetarian']
             }
-            
+            veg_recipes.append(recipe_obj)
     # Sorts the recipes list by the number of loves each recipe has, starting with the highest at the top
     veg_recipes = sorted(veg_recipes, key=itemgetter("recipe_loves"), reverse=True)
     return render_template('search_veg.html', veg_recipes=veg_recipes, veg=expand_veg, recipes=mongo.db.recipes.find())
@@ -257,4 +257,4 @@ def delete_recipe(recipe_id):
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
     port=int(os.environ.get('PORT')),
-    debug=True)
+    debug=False)

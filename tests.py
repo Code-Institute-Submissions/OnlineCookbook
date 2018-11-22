@@ -24,10 +24,6 @@ class TestStringMethods(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertNotEqual(response.status_code, 404)
             
-            response = client.get('/all_recipes')
-            self.assertEqual(response.status_code, 200)
-            self.assertNotEqual(response.status_code, 404)
-            
             response = client.get('/add_recipe')
             self.assertEqual(response.status_code, 200)
             self.assertNotEqual(response.status_code, 404)
@@ -65,7 +61,7 @@ class TestStringMethods(unittest.TestCase):
             self.assertEqual(response.status_code, 404)
             self.assertNotEqual(response.status_code, 200)
         print("Test 'test_bad_route' has passed")
-            
+        
             
     
     """Tests the get_counts function, with a dummy recipe object"""      
@@ -81,7 +77,6 @@ class TestStringMethods(unittest.TestCase):
         self.test_response2 =  {'pat': 4, 'pam': 1, '38383': 1, 'jess': 0}
         self.test_response_wrong2 =  {'paul': 4, 'james': 1, '383838': 1, 'jess': 0}
         
-        
         self.assertEqual((get_counts(self.test_recipe_object, 'author_name', self.test_authors_names)), self.test_response)
         self.assertNotEqual((get_counts(self.test_recipe_object, 'author_name', self.test_authors_names)), self.test_response_wrong)
         
@@ -89,7 +84,6 @@ class TestStringMethods(unittest.TestCase):
         self.assertNotEqual((get_counts(self.test_recipe_object, 'author_name', self.test_authors_names)), self.test_response_wrong2)
         
         print("Test 'test_get_counts' has passed")
-            
             
     
 if __name__ == '__main__':

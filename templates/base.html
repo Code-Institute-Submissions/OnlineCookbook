@@ -44,6 +44,7 @@
    
         {% block content %} {% endblock %}
         
+        <!--Navigation below content, to enhance the layout of the app-->
         <div>
             <a href="{{url_for('get_recipes')}}" class="waves-effect waves-light btn btn_small button-center">Back to Recipes</a>
             <a href="{{url_for('add_recipe')}}" class="waves-effect waves-light btn btn_small button-center">Add Recipe</a>
@@ -51,6 +52,7 @@
             <a href="{{url_for('add_cuisine')}}" class="waves-effect waves-light btn btn_small button-center">Add Cuisine</a>
         </div>
         
+        <!--Scripts for interative features on the app-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
         <script type="text/javascript">

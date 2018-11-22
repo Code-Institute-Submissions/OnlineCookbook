@@ -133,8 +133,13 @@ I encountered a bug when trying to deploy to Heroku - the app wouldn't load. I r
 
 I realised that I had originally missed a space between '--' and 'local', which left requirements.txt empty. This taught me to always check my files before pushing to Heroku and Git Hub, because I would have realised that the file was empty and therefore the app would not load.
 
-The push of the updated requirements.txt then caused a second error with Heroku, as I had pushed requirements that were default to the workspace, which Heroku could not load. I cleared the requirements.txt and will be manually adding to the file, so this issue does not happen in the future. 
+The push of the updated requirements.txt then caused a second error with Heroku, as I had pushed requirements that were default to the workspace, which Heroku could not load. I cleared the requirements.txt and will be manually adding to the file, so this issue does not happen in the future.
 
+Before pushing my code for the final time, I decided to do a final manual test of my code, by trying every link again and seeing if I could 'break' the app. I am glad that I did this, as I discovered a bug with the *'search_veg'* function. The count of vegetarian recipes was appearing, but when I drilled into this, the comment 'There does not currently appear to be any vegetarian recipes' appeared, which I included as an if conditional on *'search_veg.html'* to be printed if there were no recipes of that kind in the database. I realised this was because I had accidentally deleted the following line of code from *'app.py'*, from the *'search-veg'* function:
+
+> veg_recipes.append(recipe_obj)
+
+This meant that the *'veg_recipes'* list was empty, as nothing was being appended to it, and the for loop on *'search_veg.html'* was therefore empty. I resolved this by adding the line of code back in.
 
 ### Version Control
 1. Initial commit. Updated MongoDB, connected to database. Installed Flask. Started app.py. Deployed to Heroku.
@@ -152,3 +157,4 @@ The push of the updated requirements.txt then caused a second error with Heroku,
 13. Added functions to allow users to edit and delete recipes that already exist in the database. Fixed 'all_recipes' bug. Added a title to the home page. Added Materialize library code, to differentiate from my code.
 14. Completed library of code. Added media queries.
 15. Worked on README.md, and also added comments to code for clarity.
+16. Final edits to code. Turned debug mode off.
