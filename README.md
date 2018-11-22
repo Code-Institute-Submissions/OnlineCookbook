@@ -158,3 +158,4 @@ This meant that the *'veg_recipes'* list was empty, as nothing was being appende
 14. Completed library of code. Added media queries.
 15. Worked on README.md, and also added comments to code for clarity.
 16. Final edits to code. Turned debug mode off.
+17. Deployment to Heroku.
