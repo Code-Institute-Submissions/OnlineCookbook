@@ -32,18 +32,23 @@ def get_counts(recipes, individual_item, list_of_items):
 @app.route('/')
 @app.route('/get_recipes')
 def get_recipes():
+    
+    # Retrieves the data from the database
     recipes = mongo.db.recipes.find()
     cuisine_list_looped = mongo.db.cuisine_list.find()
     vegetarian_list_looped=mongo.db.vegetarian_list.find()
     author_list_looped=mongo.db.authors_list.find()
     recipe_objects = [recipe for recipe in recipes]
     
+    # Creates a list of the different cuisines, and uses the 'get_count' function to return a dictionary of the cuisine names with a count of how many recipes are in the database under that cuisine
     cuisine_names = [cuisine['cuisine_name'].lower() for cuisine in cuisine_list_looped]
     cuisine_counts = get_counts(recipe_objects, 'cuisine_name', cuisine_names)
     
+    # Creates a list of the different authors, and uses the 'get_count' function to return a dictionary of the authors with a count of how many recipes in the database that they submitted
     authors_names = [auth['author'].lower() for auth in author_list_looped]
     author_counts = get_counts(recipe_objects, 'author_name', authors_names)
-        
+    
+    # Creates a list of all of the vegetarian recipes in the database, and returns a dictionary including the number of vegetarian recipes
     veg_type = [veg['vegetarian'].lower() for veg in vegetarian_list_looped]
     veg_counts = get_counts(recipe_objects, 'recipe_is_vegetarian', veg_type)
     
@@ -58,17 +63,13 @@ def get_recipes():
     all_recipe_count = mongo.db.recipes.count())
     
 
-# Function that returns all recipes from the recipes collction in the database
-# @app.route('/all_recipes')
-# def all_recipes():
-#     recipes = mongo.db.recipes.find()
-#     return render_template("all_recipes.html",
-#             recipes=recipes)
-
+# Function that returns all of the recipes in the database, and renders them to 'all_recipes.html'
 @app.route('/all_recipes/')
 def all_recipes():
     recipes = mongo.db.recipes.find()
     all_recipes_list = []
+    
+    # Loops through all of the recipes, and appends each object to a new list
     for recipe in recipes:
             recipe_obj = {
                 'recipe_obj': recipe,
@@ -83,12 +84,11 @@ def all_recipes():
                 'recipe_is_vegetarian': recipe['recipe_is_vegetarian']
             }
             all_recipes_list.append(recipe_obj)
+    
+    # Sorts the recipes list by the number of loves each recipe has, starting with the highest at the top        
     all_recipes_list = sorted(all_recipes_list, key=itemgetter("recipe_loves"), reverse=True)
     return render_template('all_recipes.html', recipes=recipes, all_recipes_list=all_recipes_list)
 
-
-
-            
             
 # Function that returns all of the vegetarian recipes and renders them to 'search_veg.html'
 @app.route('/search_veg/<veg_id>')
@@ -97,6 +97,8 @@ def search_veg(veg_id):
     recipes = mongo.db.recipes.find()
     veg_recipes = []
     for recipe in recipes:
+        
+        # Loops through all of the recipes, and appends each object to a new list
         if recipe['recipe_is_vegetarian'] == expand_veg['vegetarian']:
             recipe_obj = {
                 'recipe_obj': recipe,
@@ -110,7 +112,8 @@ def search_veg(veg_id):
                 'recipe_method': recipe['recipe_method'],
                 'recipe_is_vegetarian': recipe['recipe_is_vegetarian']
             }
-            veg_recipes.append(recipe_obj)
+            
+    # Sorts the recipes list by the number of loves each recipe has, starting with the highest at the top
     veg_recipes = sorted(veg_recipes, key=itemgetter("recipe_loves"), reverse=True)
     return render_template('search_veg.html', veg_recipes=veg_recipes, veg=expand_veg, recipes=mongo.db.recipes.find())
     
@@ -122,6 +125,8 @@ def search_cuisine(cuisine_id):
     recipes = mongo.db.recipes.find()
     cuisine_recipes = []
     for recipe in recipes:
+        
+        # Loops through all of the recipes, and appends each object to a new list
         if recipe['cuisine_name'] == expand_cuisine['cuisine_name']:
             recipe_obj = {
                 'recipe_obj': recipe,
@@ -136,6 +141,8 @@ def search_cuisine(cuisine_id):
                 'recipe_is_vegetarian': recipe['recipe_is_vegetarian']
             }
             cuisine_recipes.append(recipe_obj)
+    
+    # Sorts the recipes list by the number of loves each recipe has, starting with the highest at the top   
     cuisine_recipes = sorted(cuisine_recipes, key=itemgetter("recipe_loves"), reverse=True)
     return render_template('search_cuisine.html', cuisine_recipes=cuisine_recipes, cuisine=expand_cuisine, recipes=mongo.db.recipes.find())
 
@@ -147,6 +154,8 @@ def search_author(author_id):
     recipes = mongo.db.recipes.find()
     author_recipes = []
     for recipe in recipes:
+        
+        # Loops through all of the recipes, and appends each object to a new list
         if recipe['author_name'] == expand_author['author']:
             recipe_obj = {
                 'recipe_obj': recipe,
@@ -161,6 +170,8 @@ def search_author(author_id):
                 'recipe_is_vegetarian': recipe['recipe_is_vegetarian']
             }
             author_recipes.append(recipe_obj)
+    
+    # Sorts the recipes list by the number of loves each recipe has, starting with the highest at the top   
     author_recipes = sorted(author_recipes, key=itemgetter("recipe_loves"), reverse=True)
     return render_template('search_author.html', author_recipes=author_recipes, author=expand_author, recipes=mongo.db.recipes.find())
     
@@ -173,7 +184,7 @@ def add_recipe():
      authors_list=mongo.db.authors_list.find())
 
 
-# Adds user's input into the database
+# Adds user's input into the database using the POST method, from a form on 'add_recipe.html'
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     recipes =  mongo.db.recipes
@@ -187,7 +198,7 @@ def add_author():
     return render_template('add_author.html')
     
     
-# Adds user's input into the database
+# Adds user's input into the database using the POST method, from a form on 'add_author.html'
 @app.route('/insert_author', methods=['POST'])
 def insert_author():
     authors_list =  mongo.db.authors_list
@@ -200,7 +211,8 @@ def insert_author():
 def add_cuisine():
     return render_template('add_cuisine.html')
     
-# Adds user's input into the database
+    
+# Adds user's input into the database using the POST method, from a form on 'add_cuisine.html'
 @app.route('/insert_cuisine', methods=['POST'])
 def insert_cuisine():
     cuisine_list =  mongo.db.cuisine_list
@@ -217,7 +229,7 @@ def edit_recipe(recipe_id):
     return render_template('edit_recipe.html', recipe=the_recipe, cuisine_list=all_cuisines, authors_list=all_authors)
   
   
-# Updates the existing recipe in the database with the user's input
+# Updates the existing recipe in the database with the user's input, using the POST method from a form on 'edit_recipe.html'
 @app.route('/update_recipe/<recipe_id>', methods=["POST"])
 def update_recipe(recipe_id):
     recipes = mongo.db.recipes
