@@ -9,6 +9,7 @@
 8. Started automated testing. 
 9. Added search_veg and search_cuisine functions, and relevant templates. Wrote automated tests for functions so far.
 10. Users can now submit recipes to the database, with the 'insert_recipe' function.
+11. Users can now submit recipes to the database, with the 'insert_author' function.
 
 
 

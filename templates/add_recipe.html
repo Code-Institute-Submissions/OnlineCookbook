@@ -5,7 +5,7 @@
         <h3> Add Recipe </h3>
         <div class="center">
             Please add your favourite recipes to our collection. <br>
-            If this is your first time adding to the database, please <a href="#" class="custom_link">add yourself as an author</a> first.<br>
+            If this is your first time adding to the database, please <a href="{{url_for('add_author')}}" class="custom_link">add yourself as an author</a> first.<br>
             You will also need to <a href="#" class="custom_link">add the cuisine</a> if it does not <a href="{{url_for('get_recipes')}}" class="custom_link">already appear in the database.</a><br><br>
         </div>
         <form action="{{ url_for('insert_recipe') }}" method="POST" class="col s12">
